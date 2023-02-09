@@ -1,8 +1,9 @@
 import React from 'react';
 import {StyleSheet, Text} from 'react-native';
+import TasksScreen from './src/screens/Tasks';
 
 const App = ({children, title}) => {
-  return <Text>Hello World !</Text>;
+  return <TasksScreen />;
 };
 
 const styles = StyleSheet.create({});

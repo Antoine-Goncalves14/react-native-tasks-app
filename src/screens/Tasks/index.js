@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {Text} from 'react-native';
+import {Text, FlatList} from 'react-native';
 
 import Header from '../../components/Header';
 
@@ -10,15 +10,22 @@ export default function TasksScreen() {
     {title: 'Hello World!', isCompleted: false},
   ]);
 
+  // item = un élément
+  const renderItem = ({item}) => {
+    return <Text>{item.title}</Text>;
+  };
+
   // 2x TasksCounter => props nb & title
   // TasksList => return FlatList => TaskTile
 
   return (
     <>
       <Header />
-      {tasks.map(t => (
-        <Text key={t}>{t.title}</Text>
-      ))}
+      <FlatList
+        data={tasks}
+        keyExtractor={(item, index) => index.toString()}
+        renderItem={renderItem}
+      />
     </>
   );
 }

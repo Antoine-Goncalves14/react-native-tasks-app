@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import {Text, FlatList} from 'react-native';
 
 import Header from '../../components/Header';
+import TaskFile from './TaskFile';
 
 export default function TasksScreen() {
   // Liste de tâches
@@ -12,7 +13,7 @@ export default function TasksScreen() {
 
   // item = un élément
   const renderItem = ({item}) => {
-    return <Text>{item.title}</Text>;
+    return <TaskFile task={item} />;
   };
 
   // 2x TasksCounter => props nb & title

@@ -1,9 +1,13 @@
 import React from 'react';
-import {StyleSheet, Text} from 'react-native';
+import {SafeAreaView, StyleSheet, Text} from 'react-native';
 import TasksScreen from './src/screens/Tasks';
 
 const App = ({children, title}) => {
-  return <TasksScreen />;
+  return (
+    <SafeAreaView>
+      <TasksScreen />
+    </SafeAreaView>
+  );
 };
 
 const styles = StyleSheet.create({});

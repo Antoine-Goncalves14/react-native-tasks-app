@@ -19,13 +19,12 @@ export default function TasksScreen() {
   // TasksList => return FlatList => TaskTile
 
   return (
-    <>
-      <Header />
-      <FlatList
-        data={tasks}
-        keyExtractor={(item, index) => index.toString()}
-        renderItem={renderItem}
-      />
-    </>
+    <FlatList
+      ListHeaderComponent={<Header />}
+      contentContainerStyle={{flexGrow: 1}}
+      data={tasks}
+      keyExtractor={(item, index) => index.toString()}
+      renderItem={renderItem}
+    />
   );
 }

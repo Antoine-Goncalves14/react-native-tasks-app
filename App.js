@@ -4,7 +4,7 @@ import TasksScreen from './src/screens/Tasks';
 
 const App = ({children, title}) => {
   return (
-    <SafeAreaView>
+    <SafeAreaView style={{flex: 1}}>
       <TasksScreen />
     </SafeAreaView>
   );

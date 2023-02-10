@@ -1,8 +1,9 @@
 import React, {useState} from 'react';
-import {Text, FlatList} from 'react-native';
+import {FlatList} from 'react-native';
 
 import Header from '../../components/Header';
 import TaskFile from './TaskFile';
+import TaskForm from './TaskForm';
 
 export default function TasksScreen() {
   // Liste de tâches
@@ -21,7 +22,12 @@ export default function TasksScreen() {
 
   return (
     <FlatList
-      ListHeaderComponent={<Header />}
+      ListHeaderComponent={
+        <>
+          <Header />
+          <TaskForm />
+        </>
+      }
       contentContainerStyle={{flexGrow: 1}}
       data={tasks}
       keyExtractor={(item, index) => index.toString()}

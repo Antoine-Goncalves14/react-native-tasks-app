@@ -5,7 +5,8 @@ import Counter from '../../components/Counter';
 import FloatingBtn from '../../components/FloattingBtn';
 
 import Header from '../../components/Header';
-import {deleteTask, getTasks, toogleTask} from '../../redux/store';
+import {deleteTask, toogleTask} from '../../redux/actions';
+import {getTasks} from '../../redux/selectors';
 import TaskFile from './TaskFile';
 import TaskForm from './TaskForm';
 

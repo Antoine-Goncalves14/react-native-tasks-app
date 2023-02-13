@@ -3,7 +3,7 @@ import {Button, StyleSheet, TextInput, View} from 'react-native';
 import {useDispatch} from 'react-redux';
 import {addTask} from '../../redux/store';
 
-export default function TaskForm({onAddTask}) {
+export default function TaskForm() {
   const [newTitle, setNewTitle] = useState('');
   const dispatch = useDispatch();
 
@@ -17,7 +17,6 @@ export default function TaskForm({onAddTask}) {
     }
 
     dispatch(addTask(newTitle));
-    onAddTask(newTitle);
     setNewTitle('');
   };
 

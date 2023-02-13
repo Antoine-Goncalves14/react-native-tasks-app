@@ -1,9 +1,11 @@
 import React, {useState} from 'react';
 import {FlatList, StyleSheet, View} from 'react-native';
+import {useSelector, useDispatch} from 'react-redux';
 import Counter from '../../components/Counter';
 import FloatingBtn from '../../components/FloattingBtn';
 
 import Header from '../../components/Header';
+import {deleteTask, getTasks, toogleTask} from '../../redux/store';
 import TaskFile from './TaskFile';
 import TaskForm from './TaskForm';
 
@@ -11,7 +13,9 @@ export default function TasksScreen() {
   // Liste de tâches
   // State pour garder en mémoire les tâches
   const [isFormVisible, setIsFormVisible] = useState(false);
-  const [tasks, setTasks] = useState([]);
+
+  const tasks = useSelector(getTasks);
+  const dispatch = useDispatch();
 
   // item = un élément
   const renderItem = ({item}) => {
@@ -24,49 +28,12 @@ export default function TasksScreen() {
     );
   };
 
-  // Ajouter une fonction pour ajouter une tâche au state
-  // Passer cette fonction à notre formulaire
-  const onAddTask = title => {
-    setTasks([
-      ...tasks,
-      {
-        id: Date.now(),
-        title,
-        isCompleted: false,
-      },
-    ]);
-  };
-
   const onDeleteTask = id => {
-    let newTasks = [];
-
-    tasks.forEach(t => {
-      if (t.id !== id) {
-        newTasks.push(t);
-        return;
-      }
-    });
-
-    setTasks(newTasks);
+    dispatch(deleteTask(id));
   };
 
   const onUpdateTask = id => {
-    let newTasks = [];
-
-    tasks.forEach(t => {
-      if (t.id !== id) {
-        newTasks.push(t);
-        return;
-      }
-
-      newTasks.push({
-        id: t.id,
-        title: t.title,
-        isCompleted: !t.isCompleted,
-      });
-    });
-
-    setTasks(newTasks);
+    dispatch(toogleTask(id));
   };
 
   const _toogleForm = () => {
@@ -84,7 +51,7 @@ export default function TasksScreen() {
         ListHeaderComponent={
           <>
             <Header />
-            {isFormVisible && <TaskForm onAddTask={onAddTask} />}
+            {isFormVisible && <TaskForm />}
             <View style={styles.containerCounters}>
               <Counter nb={tasks.length} title="Tâches créer" />
               <Counter

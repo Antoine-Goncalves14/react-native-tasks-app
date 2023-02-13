@@ -23,8 +23,26 @@ export function addTask(title) {
 // TOOGLE_TASK
 const TOOGLE_TASK = 'TOOGLE_TASK';
 
+export function toogleTask(id) {
+  return {
+    type: TOOGLE_TASK,
+    payload: {
+      id,
+    },
+  };
+}
+
 // DELETE_TASK
 const DELETE_TASK = 'DELETE_TASK';
+
+export function deleteTask(id) {
+  return {
+    type: DELETE_TASK,
+    payload: {
+      id,
+    },
+  };
+}
 
 // Reducers: fonctions retournent un nouveau state
 
@@ -41,6 +59,27 @@ const tasksList = (state = initialState, action) => {
           isCompleted: false,
         },
       ];
+
+    case TOOGLE_TASK:
+      let newState = [];
+
+      state.forEach(task => {
+        if (task.id === action.payload.id) {
+          newState.push({
+            ...task,
+            isCompleted: !task.isCompleted,
+          });
+          return;
+        }
+
+        newState.push(task);
+      });
+
+      return newState;
+
+    case DELETE_TASK:
+      return state.filter(task => task.id !== action.payload.id);
+
     default:
       return state;
   }

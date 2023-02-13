@@ -15,7 +15,11 @@ export default function TaskFile({task, onUpdateTask, onDeleteTask}) {
       <Pressable onPress={onChangeStatus} style={styles.subContainer}>
         <Image
           style={styles.check}
-          source={require('../../../assets/icons/icon_circle.png')}
+          source={
+            task.isCompleted
+              ? require('../../../assets/icons/icon_check_circle.png')
+              : require('../../../assets/icons/icon_circle.png')
+          }
         />
         <Text style={styles.title}>{task.title}</Text>
       </Pressable>

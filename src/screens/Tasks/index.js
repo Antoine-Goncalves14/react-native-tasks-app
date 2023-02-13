@@ -69,6 +69,8 @@ export default function TasksScreen() {
   // 2x TasksCounter => props nb & title
   // TasksList => return FlatList => TaskTile
 
+  // Ajouter un bouton flottant => style absolute
+  // callback => rendu conditionnel. TaskForm
   return (
     <FlatList
       ListHeaderComponent={

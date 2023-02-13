@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
-import {FlatList} from 'react-native';
+import {FlatList, StyleSheet, View} from 'react-native';
+import Counter from '../../components/Counter';
 import FloatingBtn from '../../components/FloattingBtn';
 
 import Header from '../../components/Header';
@@ -84,6 +85,13 @@ export default function TasksScreen() {
           <>
             <Header />
             {isFormVisible && <TaskForm onAddTask={onAddTask} />}
+            <View style={styles.containerCounters}>
+              <Counter nb={tasks.length} title="Tâches créer" />
+              <Counter
+                nb={tasks.filter(t => t.isCompleted === true).length}
+                title="Tâches effectuées"
+              />
+            </View>
           </>
         }
         contentContainerStyle={{flexGrow: 1}}
@@ -95,3 +103,12 @@ export default function TasksScreen() {
     </>
   );
 }
+
+const styles = StyleSheet.create({
+  containerCounters: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginTop: 10,
+    paddingHorizontal: 20,
+  },
+});

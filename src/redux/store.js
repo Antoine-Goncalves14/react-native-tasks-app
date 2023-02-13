@@ -2,6 +2,10 @@ import {legacy_createStore as createStore, combineReducers} from 'redux';
 
 // Selectors: sélectionner une partie de notre store
 
+export const getTasks = store => store.tasksList;
+export const getCompletedTasks = store =>
+  store.tasksList.filter(task => task.isCompleted);
+
 // Actions: fonction qui renvoient un objet aux reducers -> { type: MON_ACTION, payload: { DATA } }
 
 // ADD_Task

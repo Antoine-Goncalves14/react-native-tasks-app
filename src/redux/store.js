@@ -7,7 +7,7 @@ import {legacy_createStore as createStore, combineReducers} from 'redux';
 // ADD_Task
 const ADD_TASK = 'ADD_TASK';
 
-function addTask(title) {
+export function addTask(title) {
   return {
     type: ADD_TASK,
     payload: {

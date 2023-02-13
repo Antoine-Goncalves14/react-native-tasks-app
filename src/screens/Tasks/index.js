@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import {FlatList} from 'react-native';
+import FloatingBtn from '../../components/FloattingBtn';
 
 import Header from '../../components/Header';
 import TaskFile from './TaskFile';
@@ -8,6 +9,7 @@ import TaskForm from './TaskForm';
 export default function TasksScreen() {
   // Liste de tâches
   // State pour garder en mémoire les tâches
+  const [isFormVisible, setIsFormVisible] = useState(false);
   const [tasks, setTasks] = useState([]);
 
   // item = un élément
@@ -66,23 +68,30 @@ export default function TasksScreen() {
     setTasks(newTasks);
   };
 
+  const _toogleForm = () => {
+    setIsFormVisible(!isFormVisible);
+  };
+
   // 2x TasksCounter => props nb & title
   // TasksList => return FlatList => TaskTile
 
   // Ajouter un bouton flottant => style absolute
   // callback => rendu conditionnel. TaskForm
   return (
-    <FlatList
-      ListHeaderComponent={
-        <>
-          <Header />
-          <TaskForm onAddTask={onAddTask} />
-        </>
-      }
-      contentContainerStyle={{flexGrow: 1}}
-      data={tasks}
-      keyExtractor={(item, index) => index.toString()}
-      renderItem={renderItem}
-    />
+    <>
+      <FlatList
+        ListHeaderComponent={
+          <>
+            <Header />
+            {isFormVisible && <TaskForm onAddTask={onAddTask} />}
+          </>
+        }
+        contentContainerStyle={{flexGrow: 1}}
+        data={tasks}
+        keyExtractor={(item, index) => index.toString()}
+        renderItem={renderItem}
+      />
+      <FloatingBtn toogle={_toogleForm} isOpen={isFormVisible} />
+    </>
   );
 }

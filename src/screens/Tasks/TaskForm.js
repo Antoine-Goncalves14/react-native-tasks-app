@@ -1,14 +1,21 @@
 import React, {useState} from 'react';
 import {Button, StyleSheet, TextInput, View} from 'react-native';
 
-export default function TaskForm() {
-  const [newTitle, setNewTitle] = useState();
+export default function TaskForm({onAddTask}) {
+  const [newTitle, setNewTitle] = useState('');
 
   const onChangeText = title => {
     setNewTitle(title);
   };
 
-  const onAddTask = () => {};
+  const onAddNewTask = () => {
+    if (newTitle === '') {
+      return;
+    }
+
+    onAddTask(newTitle);
+    setNewTitle('');
+  };
 
   return (
     <View style={styles.container}>
@@ -20,7 +27,7 @@ export default function TaskForm() {
       />
       <Button
         title="Ajouter"
-        onPress={onAddTask}
+        onPress={onAddNewTask}
         color="blue"
         accessibilityLabel="Add new Task"
       />

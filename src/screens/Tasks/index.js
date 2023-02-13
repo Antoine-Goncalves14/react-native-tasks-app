@@ -17,6 +17,19 @@ export default function TasksScreen() {
     return <TaskFile task={item} />;
   };
 
+  // Ajouter une fonction pour ajouter une tâche au state
+  // Passer cette fonction à notre formulaire
+  const onAddTask = title => {
+    setTasks([
+      ...tasks,
+      {
+        id: Date.now(),
+        title,
+        isCompleted: false,
+      },
+    ]);
+  };
+
   // 2x TasksCounter => props nb & title
   // TasksList => return FlatList => TaskTile
 
@@ -25,7 +38,7 @@ export default function TasksScreen() {
       ListHeaderComponent={
         <>
           <Header />
-          <TaskForm />
+          <TaskForm onAddTask={onAddTask} />
         </>
       }
       contentContainerStyle={{flexGrow: 1}}
